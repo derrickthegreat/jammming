@@ -37,11 +37,13 @@ class App extends React.Component {
       let playlist = this.state.playlistTracks;
       playlist.push(selectedTrack);
       this.setState({playListTracks: playlist});
+      // console.log(this.state.playlistTracks);
     }
   }
   removeTrack(selectedTrack) {
     let playlist = this.state.playlistTracks.filter(track => selectedTrack.id !== track.id);
-    this.setState({playListTracks: playlist});
+    this.setState({playlistTracks: playlist});
+    // console.log(this.state.playlistTracks);
   }
   render() {
     return (
