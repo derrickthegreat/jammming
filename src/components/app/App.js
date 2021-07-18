@@ -24,9 +24,10 @@ class App extends React.Component {
     super(props);
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylist = this.updatePlaylist.bind(this);
     this.state = {
       searchResults: sampleResults,
-      playlistName:'Name 1',
+      playlistName:'My Playlist :-)',
       playlistTracks: samplePlaylistTracks
     }
   }
@@ -36,14 +37,17 @@ class App extends React.Component {
     } else {
       let playlist = this.state.playlistTracks;
       playlist.push(selectedTrack);
-      this.setState({playListTracks: playlist});
+      this.setState({ playListTracks: playlist });
       // console.log(this.state.playlistTracks);
     }
   }
   removeTrack(selectedTrack) {
     let playlist = this.state.playlistTracks.filter(track => selectedTrack.id !== track.id);
-    this.setState({playlistTracks: playlist});
+    this.setState({ playlistTracks: playlist });
     // console.log(this.state.playlistTracks);
+  }
+  updatePlaylist(name) {
+    this.setState({ playlistName: name })
   }
   render() {
     return (
@@ -59,6 +63,7 @@ class App extends React.Component {
             <Playlist name={this.state.playlistName}
               playlist={this.state.playlistTracks}
               onRemove={this.removeTrack}
+              onNameChange={this.updatePlaylist}
             />
           </div>
         </div>
