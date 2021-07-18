@@ -15,7 +15,7 @@ class Track extends React.Component {
         }
     }
     addTrack() {
-        return this.props.onAdd
+        this.props.onAdd(this.props.track);
     }
     render() {
         return (
