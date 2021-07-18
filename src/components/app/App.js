@@ -23,20 +23,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    
     this.state = {
       searchResults: sampleResults,
       playlistName:'Name 1',
       playlistTracks: samplePlaylistTracks
     }
   }
-  addTrack(track) {
-    if(this.state.playlistTracks.find(savedTrack => track.id == savedTrack.id)) {
-      return
+  addTrack(selectedTrack) {
+    if(this.state.playlistTracks.find(track => selectedTrack.id === track.id)) {
+      return;
     } else {
-      let playlist = this.state.playlistTracks
-      playlist.push(track)
-      this.setState({playListTracks: playlist})
+      let playlist = this.state.playlistTracks;
+      playlist.push(selectedTrack);
+      this.setState({playListTracks: playlist});
     }
+  }
+  removeTrack(selectedTrack) {
+    let playlist = this.state.playlistTracks.filter(track => selectedTrack.id !== track.id);
+    this.setState({playListTracks: playlist});
   }
   render() {
     return (
