@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/util/CLIENT_ID.js
 
 # testing
 /coverage

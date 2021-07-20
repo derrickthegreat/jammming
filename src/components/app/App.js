@@ -5,19 +5,19 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar'
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
+// const sampleResults = [
+//   {name: 'name1', artist: 'artist1', album: 'album1', id: 1},
+//   {name: 'name2', artist: 'artist2', album: 'album2', id: 2},
+//   {name: 'name3', artist: 'artist3', album: 'album3', id: 3},
+// ]
 
-const sampleResults = [
-  {name: 'name1', artist: 'artist1', album: 'album1', id: 1},
-  {name: 'name2', artist: 'artist2', album: 'album2', id: 2},
-  {name: 'name3', artist: 'artist3', album: 'album3', id: 3},
-]
-
-const samplePlaylistTracks = [
-  {name: 'name4', artist: 'artist4', album: 'album4', id: 4},
-  {name: 'name5', artist: 'artist5', album: 'album2', id: 5},
-  {name: 'name6', artist: 'artist6', album: 'album3', id: 6},
-]
+// const samplePlaylistTracks = [
+//   {name: 'name4', artist: 'artist4', album: 'album4', id: 4},
+//   {name: 'name5', artist: 'artist5', album: 'album2', id: 5},
+//   {name: 'name6', artist: 'artist6', album: 'album3', id: 6},
+// ]
 
 class App extends React.Component {
   constructor(props) {
@@ -30,9 +30,9 @@ class App extends React.Component {
     this.search = this.search.bind(this);
 
     this.state = {
-      searchResults: sampleResults,
-      playlistName:'My Playlist :-)',
-      playlistTracks: samplePlaylistTracks
+      searchResults: [],
+      playlistName:'New Playlist :-)',
+      playlistTracks: [],
     }
   }
 
@@ -61,9 +61,10 @@ class App extends React.Component {
     const trackURIs = this.state.playlistTracks.map(track => track.uri)
     return trackURIs
   }
-
   search(str) {
-    console.log(str);
+    Spotify.search(str).then(results => {
+      this.setState({ searchResults: results})
+    });
   }
 
   render() {
